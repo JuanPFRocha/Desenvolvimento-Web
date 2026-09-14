@@ -1,13 +1,15 @@
 from django.db import models
 
 # Create your models here.
-class Professor(models.Models):
+class Professor(models.Model):
     matricula = models.CharField(max_length=12)
     nome = models.CharField(max_length=100)
     email = models.EmailField(max_length=200)
     cpf = models.CharField(max_length=14)
+    senha = models.CharField(max_length=16)
+    foto = models.ImageField(upload_to='fotos/professores', null=True)
 
-class Curso(models.Models):
+class Curso(models.Model):
     codigo = models.IntegerField(max_length=2, primary_key=True)
     nome = models.CharField(max_length=50)
     foto = models.ImageField(upload_to='fotos/cursos')
@@ -15,13 +17,13 @@ class Curso(models.Models):
     data_inicio = models.DateField(blank=True)
     carga_horaria = models.IntegerField(max_length=2)
 
-class Turma(models.Models):
+class Turma(models.Model):
     codigo = models.CharField(max_length=15)
     ano_ingresso = models.IntegerField(max_length=4)
     periodo = models.IntegerField(max_length=1)
     curso = models.ForeignKey(Curso, on_delete=models.PROTECT)
 
-class Disciplina(models.Models):
+class Disciplina(models.Model):
     codigo = models.IntegerField(max_length=3)
     nome = models.CharField(max_length=100)
     carga_horaria = models.IntegerField(max_length=2)
