@@ -28,10 +28,10 @@ def deletarprofessor(request, id=None):
 
 def editarProfessor(request, id=None):
     professor = Professor.objects.get(pk = id)
-    form = ProfessorForm(request.POST or None, request.FILES or None)
+    form = ProfessorForm(request.POST or None, request.FILES or None, instance= professor)
     if form.is_valid():
         form.save()
-        return redirect('ListagemProfessor')
+        return redirect('listagemProfessor')
     else:
         form = ProfessorForm(instance=professor)
     dicionario = {
