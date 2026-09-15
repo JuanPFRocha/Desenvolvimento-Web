@@ -8,6 +8,9 @@ class Professor(models.Model):
     cpf = models.CharField(max_length=14)
     senha = models.CharField(max_length=16)
     foto = models.ImageField(upload_to='fotos/professores', null=True)
+    def __str__(self):
+            return self.nome
+
 
 class Curso(models.Model):
     codigo = models.IntegerField(max_length=2, primary_key=True)
@@ -16,6 +19,9 @@ class Curso(models.Model):
     duracao = models.DecimalField(max_digits=3, decimal_places=2)
     data_inicio = models.DateField(blank=True)
     carga_horaria = models.IntegerField(max_length=2)
+    def __str__(self):
+            return self.nome 
+
 
 class Turma(models.Model):
     codigo = models.CharField(max_length=15)
@@ -30,3 +36,5 @@ class Disciplina(models.Model):
     turno = models.CharField(max_length=10)
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.nome
