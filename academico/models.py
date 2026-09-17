@@ -1,4 +1,5 @@
 from django.db import models
+from estudantes.models import Estudante
 
 # Create your models here.
 class Professor(models.Model):
@@ -19,6 +20,7 @@ class Curso(models.Model):
     duracao = models.DecimalField(max_digits=3, decimal_places=2)
     data_inicio = models.DateField(blank=True)
     carga_horaria = models.IntegerField(max_length=2)
+    professor = models.ManyToManyField(Professor, blank=True)
     def __str__(self):
             return self.nome 
 
@@ -35,6 +37,12 @@ class Disciplina(models.Model):
     carga_horaria = models.IntegerField(max_length=2)
     turno = models.CharField(max_length=10)
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
+    estudante = models.ManyToManyField(Estudante, blank=True)
 
     def __str__(self):
         return self.nome
+
+class Departamento(models.Model):
+     codigo = models.CharField(max_length=10)
+     nome = models.CharField(max_length=100)
+     imagem = models.ImageField(upload_to='fotos/cursos')
