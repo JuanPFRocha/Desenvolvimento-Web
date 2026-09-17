@@ -8,7 +8,7 @@ class CursoAdmin(admin.ModelAdmin):
 class TurmaAdmin(admin.ModelAdmin):
     list_display=('codigo', 'ano_ingresso', 'periodo')
 class DisciplinaAdmin(admin.ModelAdmin):
-    list_display=('codigo','nome', 'carga_horaria', 'turno')
+    list_display=('codigo','nome', 'carga_horaria', 'turno', 'turma', 'professor')
 class DepartamentoAdmin(admin.ModelAdmin):
     list_display=('codigo', 'nome')
 

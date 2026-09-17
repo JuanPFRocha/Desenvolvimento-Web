@@ -30,6 +30,8 @@ class Turma(models.Model):
     ano_ingresso = models.IntegerField(max_length=4)
     periodo = models.IntegerField(max_length=1)
     curso = models.ForeignKey(Curso, on_delete=models.PROTECT)
+    def __str__(self):
+         return self.codigo
 
 class Disciplina(models.Model):
     codigo = models.IntegerField(max_length=3)
@@ -37,6 +39,7 @@ class Disciplina(models.Model):
     carga_horaria = models.IntegerField(max_length=2)
     turno = models.CharField(max_length=10)
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
+    professor = models.ForeignKey(Professor, on_delete=models.CASCADE, blank=True, null=True)
     estudante = models.ManyToManyField(Estudante, blank=True)
 
     def __str__(self):
