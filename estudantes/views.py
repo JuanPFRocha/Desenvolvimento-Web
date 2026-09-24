@@ -7,7 +7,7 @@ from estudantes.models import Estudante
 
 # Método/Função de listagem de estudantes
 
-def editarEstudante(request, id=None):
+def atualizarEstudante(request, id=None):
     estudante = Estudante.objects.get(pk = id)
     form = EstudanteForm(request.POST or None, request.FILES or None, instance = estudante)
     if form.is_valid():
@@ -21,14 +21,14 @@ def editarEstudante(request, id=None):
     }
     return render(request, 'editar.html', dicionario)
 
-def listarEstudantes(request):
+def listarEstudante(request):
     estudantes = Estudante.objects.all()
     contexto = {
         'listaEst' : estudantes,
     }
-    return render(request, 'listagem.html', contexto)
+    return render(request, 'estudantes/listagem.html', contexto)
 
-def adicionarEstudante(request):
+def criarEstudante(request):
     form = EstudanteForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
@@ -37,7 +37,7 @@ def adicionarEstudante(request):
         'form' : form
     }
 
-    return render(request, 'estudante.html', dicionario)
+    return render(request, 'estudantes/adicionar.html', dicionario)
 
 def deletarEstudante(request, id=None):
     estudante = Estudante.objects.get(pk = id)

@@ -1,17 +1,17 @@
 from django.http import request
 from django.shortcuts import redirect, render
-from academico.models import Professor, Curso
+from academico.models import Professor, Curso, Turma
 from academico.forms import ProfessorForm, CursoForm
 
 # Create your views here.
-def ListagemProfessor(request):
+def listarProfessor(request):
     professores = Professor.objects.all()
     contexto = {
         'listaEst' : professores
     }
-    return render(request, 'listagemProfessor.html', contexto)
+    return render(request, 'professores/listagem.html', contexto)
 
-def AdicionaProfessor(request):
+def criarProfessor(request):
     form  = ProfessorForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
@@ -21,12 +21,12 @@ def AdicionaProfessor(request):
     }
     return render(request, 'professor.html', dicionario)
 
-def deletarprofessor(request, id=None):
+def deletarProfessor(request, id=None):
     professor = Professor.objects.get(pk = id)
     professor.delete()
     return redirect('listagemProfessor')
 
-def editarProfessor(request, id=None):
+def atualizarProfessor(request, id=None):
     professor = Professor.objects.get(pk = id)
     form = ProfessorForm(request.POST or None, request.FILES or None, instance= professor)
     if form.is_valid():
@@ -39,14 +39,15 @@ def editarProfessor(request, id=None):
     }
     return render(request, 'editarProfessor.html', dicionario)
 
-def listagemCurso(request):
+
+def listarCurso(request):
     cursos = Curso.objects.all()
     context = {
-        'listaEst' : cursos 
+        'listCursos' : cursos
     }
-    return render(request, 'listagemCurso.html ', context)
+    return render(request, 'cursos/listagem', context)
 
-def adicionarCurso(request):
+def criarCurso(request):
     form = CursoForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
@@ -56,7 +57,7 @@ def adicionarCurso(request):
     }
     return render(request, 'curso.html', dicionario)
 
-def editarCurso(request, id=None):
+def atualizarCurso(request, id=None):
     curso = Curso.objects.get(pk = id)
     form = CursoForm(request.POST or None, request.FILES or None, instance=Curso)
     if form.is_valid():
@@ -73,3 +74,29 @@ def deletarCurso(request, id=None):
     curso = Curso.objects.get(pk = id)
     curso.delete()
     return redirect('listagemCurso')
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+def listarTurma(request):
+    turmas = Turma.objects.all()
+    return render(request, 'turmas/listagem.html', {'listaTurmas' : turmas})
+
+def criarTurma(request):
+    return render()
+
+def deletarTurma(request):
+    return render()
+
+def atualizarTurma(request):
+    return render()
+
+def listarDisciplina(request):
+    return render()
+def criarDisciplina(request):
+    return render()
+def deletarDisciplina(request):
+    return render()
+def atualizarDisciplina(request):
+    return render()
+
