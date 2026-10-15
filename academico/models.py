@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Professor(models.Model):
+    id = models.IntegerField(primary_key=True)
     matricula = models.CharField(max_length=12)
     nome = models.CharField(max_length=100)
     email = models.EmailField(max_length=200)

@@ -12,14 +12,11 @@ def atualizarEstudante(request, id=None):
     form = EstudanteForm(request.POST or None, request.FILES or None, instance = estudante)
     if form.is_valid():
         form.save()
-        return redirect('/')
-    else:
-        form = EstudanteForm(instance=estudante)
-
+        return redirect('estudante_listar')
     dicionario = {
         'form' : form
     }
-    return render(request, 'editar.html', dicionario)
+    return render(request, 'estudantes/atualizar.html', dicionario)
 
 def listarEstudante(request):
     estudantes = Estudante.objects.all()
@@ -32,7 +29,7 @@ def criarEstudante(request):
     form = EstudanteForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
-        return redirect('/')
+        return redirect('estudante_listar')
     dicionario = {
         'form' : form
     }
@@ -42,4 +39,4 @@ def criarEstudante(request):
 def deletarEstudante(request, id=None):
     estudante = Estudante.objects.get(pk = id)
     estudante.delete()
-    return redirect('/')
+    return redirect('estudante_listar')

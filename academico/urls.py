@@ -9,20 +9,20 @@ urlpatterns = [
     # Professor
     path('professores', views.listarProfessor, name='professor_listar'),
     path('professores/novo/', views.criarProfessor, name='professor_criar'),
-    path('professores/<int:pk>/editar/', views.atualizarProfessor, name='professor_atualizar'),
-    path('professores/<int:pk>/deletar/', views.deletarProfessor, name='professor_deletar'),
+    path('professores/<int:id>/editar/', views.atualizarProfessor, name='professor_atualizar'),
+    path('professores/<int:id>/deletar/', views.deletarProfessor, name='professor_deletar'),
 
     # Estudante
     path('estudantes/', estViews.listarEstudante, name='estudante_listar'),
     path('estudantes/novo/', estViews.criarEstudante, name='estudante_criar'),
-    path('estudantes/<int:pk>/editar/', estViews.atualizarEstudante, name='estudante_atualizar'),
-    path('estudantes/<int:pk>/deletar/', estViews.deletarEstudante, name='estudante_deletar'),
+    path('estudantes/<int:id>/editar/', estViews.atualizarEstudante, name='estudante_atualizar'),
+    path('estudantes/<int:id>/deletar/', estViews.deletarEstudante, name='estudante_deletar'),
 
     # Turma
     path('turmas/', views.listarTurma, name='turma_listar'),
     path('turmas/novo/', views.criarTurma, name='turma_criar'),
-    path('turmas/<int:pk>/editar/', views.atualizarTurma, name='turma_atualizar'),
-    path('turmas/<int:pk>/deletar/', views.deletarTurma, name='turma_deletar'),
+    path('turmas/<int:codigo>/editar/', views.atualizarTurma, name='turma_atualizar'),
+    path('turmas/<int:codigo>/deletar/', views.deletarTurma, name='turma_deletar'),
 
     # Disciplina
     path('disciplinas/', views.listarDisciplina, name='disciplina_listar'),

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Professor, Curso
+from .models import *
 
 class ProfessorForm(forms.ModelForm):
     class Meta:
@@ -9,4 +9,9 @@ class ProfessorForm(forms.ModelForm):
 class CursoForm(forms.ModelForm):
     class Meta:
         model = Curso
+        fields = '__all__'
+
+class TurmaForm(forms.ModelForm):
+    class Meta:
+        model = Turma
         fields = '__all__'

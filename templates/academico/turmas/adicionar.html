@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Nova Turma - Gestão Acadêmica{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex align-items-center">
+                <i class="fa-solid fa-user-plus me-2"></i>
+                <h4 class="mb-0">{% if form.instance.codigo %}Editar{% else %}Cadastrar Nova{% endif %} Turma</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="{{ form.codigo.id_for_label }}" class="form-label fw-bold">Código</label>
+                            {{ form.codigo }}
+                            {% if form.codigo.errors %}<div class="text-danger small">{{ form.codigo.errors.0 }}</div>{% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="{{ form.ano_ingresso.id_for_label }}" class="form-label fw-bold">Ano de Ingresso</label>
+                            {{ form.ano_ingresso }}
+                            {% if form.ano_ingresso.errors %}<div class="text-danger small">{{ form.ano_ingresso.errors.0 }}</div>{% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="{{ form.periodo.id_for_label }}" class="form-label fw-bold">Período</label>
+                            {{ form.periodo }}
+                            {% if form.periodo.errors %}<div class="text-danger small">{{ form.periodo.errors.0 }}</div>{% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="{{ form.curso.id_for_label }}" class="form-label fw-bold">Curso</label>
+                            {{ form.curso }}
+                            {% if form.curso.errors %}<div class="text-danger small">{{ form.curso.errors.0 }}</div>{% endif %}
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'turma_listar' %}" class="btn btn-outline-secondary">
+                            <i class="fa-solid fa-arrow-left me-1"></i> Voltar
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa-solid fa-floppy-disk me-1"></i> Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

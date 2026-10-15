@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fa-solid fa-user-graduate me-2"></i>Lista de Turmas</h2>
+    <a href="{% url 'turma_criar' %}" class="btn btn-primary">
+        <i class="fa-solid fa-plus me-1"></i> Nova Turma
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Código</th>
+                        <th>Curso</th>
+                        <th>Ano de Ingresso</th>
+                        <th>Período</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for turma in listaTurmas %}
+                    <tr>
+                        <td><strong>#{{ turma.codigo }}</strong></td>
+                        <td>{{ turma.curso }}</td>
+                        <td>{{ turma.ano_ingresso }}</td>
+                        <td>{{ turma.periodo }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'turma_atualizar' turma.codigo %}" class="btn btn-sm btn-outline-warning me-1" title="Editar">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                            <a href="{% url 'turma_deletar' turma.codigo %}" class="btn btn-sm btn-outline-danger" title="Excluir">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">Nenhum estudante cadastrado.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
